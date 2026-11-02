@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ARON's Store</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#08080b;color:#fff}
+a{text-decoration:none;color:inherit}.top{background:#7c3aed;text-align:center;padding:9px;font-size:12px;font-weight:700}
+header{position:sticky;top:0;z-index:20;background:rgba(8,8,11,.94);backdrop-filter:blur(12px);border-bottom:1px solid #222}
+.nav{max-width:1150px;margin:auto;display:flex;align-items:center;justify-content:space-between;padding:16px 20px}
+.logo{font-size:22px;font-weight:900;letter-spacing:1px}.logo span{color:#a855f7}
+nav{display:flex;gap:22px;font-size:13px;color:#bbb}.actions{display:flex;gap:10px;align-items:center}
+.btn,.icon{border:1px solid #333;background:#111;color:#fff;border-radius:12px;padding:10px 14px;cursor:pointer}.btn.primary{background:#7c3aed;border-color:#7c3aed}.icon{padding:10px 12px}
+.badge{background:#a855f7;border-radius:99px;padding:2px 6px;font-size:10px;margin-left:3px}
+.hero{max-width:1150px;margin:0 auto;padding:70px 20px 45px;display:grid;grid-template-columns:1.2fr .8fr;gap:35px;align-items:center}
+.kicker{color:#a855f7;font-weight:800;letter-spacing:2px;font-size:12px}.hero h1{font-size:clamp(42px,7vw,78px);line-height:.95;margin:14px 0}.hero p{color:#aaa;max-width:540px;line-height:1.7}.hero-card{min-height:330px;border:1px solid #29222f;border-radius:28px;background:radial-gradient(circle at 50% 35%,#3b1d55,#121016 60%);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}.mascot{font-size:100px;filter:drop-shadow(0 20px 30px #000)}
+.section{max-width:1150px;margin:auto;padding:25px 20px 60px}.section h2{margin:0 0 20px}.cats{display:flex;gap:10px;flex-wrap:wrap}.cat{padding:12px 18px;border:1px solid #2a2a2d;border-radius:999px;color:#bbb;cursor:pointer}.cat:hover{border-color:#8b5cf6;color:#fff}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}.card{border:1px solid #26262a;background:#0f0f13;border-radius:20px;overflow:hidden;position:relative}.photo{height:230px;background:linear-gradient(135deg,#19151e,#302036);display:flex;align-items:center;justify-content:center;color:#777}.info{padding:15px}.info b{display:block;margin-bottom:7px}.price{color:#c084fc;font-weight:800}.heart{position:absolute;right:12px;top:12px;border:0;border-radius:50%;background:#000a;color:#fff;width:38px;height:38px;cursor:pointer}
+footer{border-top:1px solid #222;padding:35px 20px;color:#777;text-align:center}
+.drawer,.modal{position:fixed;inset:0;background:#0009;z-index:50;display:none}.drawer.open,.modal.open{display:block}.drawer-box{position:absolute;right:0;top:0;height:100%;width:min(430px,100%);background:#101014;padding:22px;overflow:auto}.modal-box{width:min(600px,92%);max-height:90vh;overflow:auto;background:#111116;border:1px solid #333;border-radius:22px;padding:22px;position:absolute;left:50%;top:50%;transform:translate(-50%,-50%)}
+.row{display:flex;justify-content:space-between;gap:12px;align-items:center;padding:13px 0;border-bottom:1px solid #25252a}.qty button{background:#222;color:#fff;border:0;border-radius:7px;padding:5px 9px}.total{font-size:20px;font-weight:800;margin:20px 0}.close{float:right;background:#222;color:#fff;border:0;border-radius:8px;padding:8px 11px;cursor:pointer}
+input,select,textarea{width:100%;margin:7px 0 13px;padding:13px;border-radius:10px;border:1px solid #333;background:#09090c;color:#fff}label{font-size:12px;color:#aaa}
+.orderbox{background:#17171d;border:1px solid #292932;border-radius:14px;padding:15px;white-space:pre-wrap;line-height:1.6;color:#ddd}
+.sendgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.viber{background:#7360f2!important;border-color:#7360f2!important}.messenger{background:#168aff!important;border-color:#168aff!important}
+.success{text-align:center;padding:25px 5px}.success .check{font-size:55px}
+@media(max-width:800px){nav{display:none}.hero{grid-template-columns:1fr;padding-top:45px}.grid{grid-template-columns:repeat(2,1fr)}.photo{height:180px}}
+@media(max-width:500px){.grid{grid-template-columns:1fr 1fr}.info{padding:11px}.hero-card{min-height:240px}.sendgrid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="top">FREE DELIVERY PROMO • ARON'S STORE</div>
+<header><div class="nav">
+<div class="logo">ARON<span>'S</span> STORE</div>
+<nav><a href="#">Home</a><a href="#new">New Arrivals</a><a href="#categories">Categories</a><a href="#contact">Contact</a></nav>
+<div class="actions"><button class="btn" onclick="openAdmin()">🔐 Admin</button><button class="icon" onclick="openCart()">🛒 <span id="count" class="badge">0</span></button></div>
+</div></header>
+
+<section class="hero">
+<div><div class="kicker">YOUR STYLE. YOUR CHOICE.</div><h1>Find your<br><span style="color:#a855f7">new style.</span></h1><p>Premium fashion picks for everyday looks. Shop ARON'S STORE — retail fashion made simple.</p><button class="btn primary" onclick="document.getElementById('new').scrollIntoView({behavior:'smooth'})">SHOP NOW</button></div>
+<div class="hero-card"><div class="mascot">🧑🏻‍🎤</div></div>
+</section>
+
+<section class="section" id="categories"><h2>Categories</h2><div class="cats">
+<div class="cat">Men</div><div class="cat">Women</div><div class="cat">Bags</div><div class="cat">Shoes</div><div class="cat">Watches</div>
+</div></section>
+
+<section class="section" id="shop-tools">
+<h2>Shop</h2>
+<div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px">
+<input id="search" oninput="filterProducts()" placeholder="🔍 Search products..." style="margin:0;flex:1;min-width:220px">
+<select id="filterCat" onchange="filterProducts()" style="margin:0;width:auto;min-width:160px">
+<option value="all">All Categories</option><option value="men">Men</option><option value="women">Women</option><option value="bags">Bags</option><option value="shoes">Shoes</option><option value="watches">Watches</option>
+</select>
+</div>
+</section>
+<section class="section" id="new"><h2>New Arrivals</h2><div class="grid">
+<div class="card product-card" data-name="Premium Oversized Tee" data-cat="men"><button class="heart" onclick="wish(this)">♡</button><div class="photo">Product Photo</div><div class="info"><b>Premium Oversized Tee</b><span class="price">MMK 35,000</span><button class="btn" style="width:100%;margin-top:8px" onclick="showProduct('Premium Oversized Tee','men',35000,'Premium oversized streetwear tee. Size and color options can be added later.')">VIEW DETAILS</button><button class="btn primary" style="width:100%;margin-top:7px" onclick="add('Premium Oversized Tee',35000)">ADD TO CART</button></div></div>
+<div class="card product-card" data-name="Classic Street Hoodie" data-cat="men"><button class="heart" onclick="wish(this)">♡</button><div class="photo">Product Photo</div><div class="info"><b>Classic Street Hoodie</b><span class="price">MMK 55,000</span><button class="btn" style="width:100%;margin-top:8px" onclick="showProduct('Classic Street Hoodie','men',55000,'Premium casual hoodie for everyday street style.')">VIEW DETAILS</button><button class="btn primary" style="width:100%;margin-top:7px" onclick="add('Classic Street Hoodie',55000)">ADD TO CART</button></div></div>
+<div class="card product-card" data-name="Everyday Shoulder Bag" data-cat="bags"><button class="heart" onclick="wish(this)">♡</button><div class="photo">Product Photo</div><div class="info"><b>Everyday Shoulder Bag</b><span class="price">MMK 45,000</span><button class="btn" style="width:100%;margin-top:8px" onclick="showProduct('Everyday Shoulder Bag','bags',45000,'Compact everyday shoulder bag. Product photo and colors can be added later.')">VIEW DETAILS</button><button class="btn primary" style="width:100%;margin-top:7px" onclick="add('Everyday Shoulder Bag',45000)">ADD TO CART</button></div></div>
+<div class="card product-card" data-name="Premium Casual Shoes" data-cat="shoes"><button class="heart" onclick="wish(this)">♡</button><div class="photo">Product Photo</div><div class="info"><b>Premium Casual Shoes</b><span class="price">MMK 75,000</span><button class="btn" style="width:100%;margin-top:8px" onclick="showProduct('Premium Casual Shoes','shoes',75000,'Premium casual shoes for everyday outfits.')">VIEW DETAILS</button><button class="btn primary" style="width:100%;margin-top:7px" onclick="add('Premium Casual Shoes',75000)">ADD TO CART</button></div></div>
+</div></section>
+
+<footer id="contact">ARON'S STORE • Retail Fashion • Myanmar</footer>
+
+
+
+
+<div class="modal" id="adminModal"><div class="modal-box">
+<button class="close" onclick="closeAdmin()">✕</button>
+<div id="loginPanel">
+<h2>🔐 ARON'S STORE ADMIN</h2>
+<p style="color:#888;font-size:13px">Demo admin login. This protects the local manager on this device.</p>
+<label>Admin PIN</label><input id="adminPin" type="password" inputmode="numeric" placeholder="Enter PIN">
+<button class="btn primary" style="width:100%" onclick="adminLogin()">LOGIN</button>
+<p style="font-size:11px;color:#666;margin-top:12px">For a real online shop, the PIN must be moved to a secure server/database.</p>
+</div>
+<div id="adminPanel" style="display:none">
+<h2>⚙️ Admin Dashboard</h2>
+<div class="cats" style="margin-bottom:15px">
+<button class="btn primary" onclick="openManager()">Manage Products</button>
+<button class="btn" onclick="exportProducts()">⬇️ Export Products</button>
+<label class="btn" style="display:inline-block">⬆️ Import Products<input id="importFile" type="file" accept=".json" onchange="importProducts(event)" style="display:none"></label>
+</div>
+<div class="orderbox">Online backend setup is the next step. This V8 keeps the current front-end and adds an admin access layer plus product backup/restore.</div>
+</div>
+</div></div>
+<div class="modal" id="managerModal"><div class="modal-box">
+<button class="close" onclick="closeManager()">✕</button>
+<h2>⚙️ Product Manager</h2>
+<p style="color:#888;font-size:12px">Products are saved in this browser. You can add, edit or delete products before connecting a real database.</p>
+<div style="border:1px solid #292932;border-radius:15px;padding:15px;margin:15px 0">
+<label>Product Name</label><input id="mName" placeholder="e.g. Premium T-Shirt">
+<label>Category</label><select id="mCat"><option value="men">Men</option><option value="women">Women</option><option value="bags">Bags</option><option value="shoes">Shoes</option><option value="watches">Watches</option></select>
+<label>Price (MMK)</label><input id="mPrice" type="number" placeholder="35000">
+<label>Description</label><textarea id="mDesc" rows="3" placeholder="Product description"></textarea>
+<button class="btn primary" style="width:100%" onclick="saveProduct()">➕ ADD / SAVE PRODUCT</button>
+</div>
+<div id="managerList"></div>
+</div></div>
+<div class="modal" id="productModal"><div class="modal-box"><button class="close" onclick="closeProduct()">✕</button>
+<div class="photo" style="height:260px;border-radius:16px;margin-bottom:18px">Product Photo</div>
+<div class="kicker" id="pmcat"></div><h2 id="pmname"></h2><div class="price" id="pmprice"></div><p id="pmdesc" style="color:#aaa;line-height:1.6"></p>
+<button class="btn primary" style="width:100%" id="pmcart">ADD TO CART</button>
+</div></div>
+<div class="drawer" id="drawer"><div class="drawer-box"><button class="close" onclick="closeCart()">✕</button><h2>Your Cart</h2><div id="cart"></div><div class="total">Total: <span id="total">MMK 0</span></div><button class="btn primary" style="width:100%" onclick="checkout()">CHECKOUT</button></div></div>
+
+<div class="modal" id="modal"><div class="modal-box"><button class="close" onclick="closeCheckout()">✕</button><h2>Checkout</h2>
+<div id="formarea">
+<label>Full Name</label><input id="name" placeholder="Your name">
+<label>Phone</label><input id="phone" placeholder="09xxxxxxxxx">
+<label>Delivery Address</label><textarea id="address" rows="3" placeholder="Township, street, house no."></textarea>
+<label>Payment Method</label><select id="payment"><option>Cash on Delivery</option><option>Bank / Mobile Payment</option><option>Contact me to confirm payment</option></select>
+<button class="btn primary" style="width:100%" onclick="placeOrder()">PLACE ORDER</button>
+</div>
+<div id="success" class="success" style="display:none"><div class="check">✅</div><h2>Order Created!</h2><p>Your order summary is ready.</p><div class="orderbox" id="summary"></div><div class="sendgrid" style="margin-top:15px">
+<button class="btn messenger" onclick="sendMessenger()">💬 Send via Facebook Messenger</button>
+<button class="btn viber" onclick="sendViber()">📞 Send via Viber</button><button class="btn" style="background:#229ed9;border-color:#229ed9;grid-column:1/-1" onclick="sendTelegram()">✈️ Send via Telegram</button>
+</div><p style="font-size:11px;color:#777;margin-top:12px">These buttons open your messaging app/site with the order details. They do not send automatically.</p>
+<button class="btn" style="width:100%;margin-top:10px" onclick="closeCheckout()">CONTINUE SHOPPING</button></div>
+</div></div>
+
+<script>
+let cart=JSON.parse(localStorage.getItem('aron_cart')||'[]'), lastText='';
+const money=n=>'MMK '+n.toLocaleString();
+function save(){localStorage.setItem('aron_cart',JSON.stringify(cart));render()}
+function add(name,price){let x=cart.find(i=>i.name===name);x?x.qty++:cart.push({name,price,qty:1});save();openCart()}
+function render(){let el=document.getElementById('cart'),total=0;el.innerHTML='';cart.forEach((i,idx)=>{total+=i.price*i.qty;el.innerHTML+=`<div class="row"><div><b>${i.name}</b><br><small>${money(i.price)}</small></div><div class="qty"><button onclick="change(${idx},-1)">−</button> ${i.qty} <button onclick="change(${idx},1)">+</button><br><button onclick="removeItem(${idx})" style="margin-top:5px;background:#35151b;color:#fff;border:0;padding:5px;border-radius:6px">Remove</button></div></div>`});document.getElementById('total').textContent=money(total);document.getElementById('count').textContent=cart.reduce((a,b)=>a+b.qty,0)}
+function change(i,n){cart[i].qty+=n;if(cart[i].qty<=0)cart.splice(i,1);save()}function removeItem(i){cart.splice(i,1);save()}
+function openCart(){document.getElementById('drawer').classList.add('open');render()}function closeCart(){document.getElementById('drawer').classList.remove('open')}
+function checkout(){if(!cart.length){alert('Your cart is empty.');return}closeCart();document.getElementById('modal').classList.add('open');document.getElementById('formarea').style.display='block';document.getElementById('success').style.display='none'}
+function closeCheckout(){document.getElementById('modal').classList.remove('open')}
+function placeOrder(){
+let name=document.getElementById('name').value.trim(),phone=document.getElementById('phone').value.trim(),address=document.getElementById('address').value.trim(),payment=document.getElementById('payment').value;
+if(!name||!phone||!address){alert('Please fill in your name, phone and address.');return}
+let total=cart.reduce((a,b)=>a+b.price*b.qty,0),id='ARON-'+Date.now().toString().slice(-6);
+let lines=cart.map(i=>`• ${i.name} × ${i.qty} = ${money(i.price*i.qty)}`).join('\\n');
+lastText=`ARON'S STORE ORDER\\nOrder ID: ${id}\\n\\nCustomer: ${name}\\nPhone: ${phone}\\nAddress: ${address}\\nPayment: ${payment}\\n\\n${lines}\\n\\nTOTAL: ${money(total)}`;
+document.getElementById('summary').textContent=lastText;
+document.getElementById('formarea').style.display='none';document.getElementById('success').style.display='block';
+localStorage.setItem('aron_last_order',lastText);cart=[];save()
+}
+function copyOrder(){
+  if(navigator.clipboard) navigator.clipboard.writeText(lastText);
+  alert('Order details copied. Paste them into the chat.');
+}
+function sendMessenger(){
+  copyOrder();
+  window.open('https://www.facebook.com/search/top?q=Aron%20Gaze','_blank');
+}
+function sendViber(){
+  copyOrder();
+  window.open('viber://chat?number=%2B959679231580','_blank');
+}
+function sendTelegram(){
+  copyOrder();
+  window.open('https://t.me/AronGaze','_blank');
+}
+function wish(b){b.textContent=b.textContent==='♡'?'♥':'♡'}
+
+
+const defaultProducts=[
+{name:'Premium Oversized Tee',cat:'men',price:35000,desc:'Premium oversized streetwear tee.'},
+{name:'Classic Street Hoodie',cat:'men',price:55000,desc:'Premium casual hoodie for everyday street style.'},
+{name:'Everyday Shoulder Bag',cat:'bags',price:45000,desc:'Compact everyday shoulder bag.'},
+{name:'Premium Casual Shoes',cat:'shoes',price:75000,desc:'Premium casual shoes for everyday outfits.'}
+];
+let products=JSON.parse(localStorage.getItem('aron_products')||'null')||defaultProducts;
+let editingIndex=-1;
+
+function saveProducts(){localStorage.setItem('aron_products',JSON.stringify(products));renderProducts();renderManager();filterProducts()}
+function renderProducts(){
+ const grid=document.getElementById('productGrid'); if(!grid)return;
+ grid.innerHTML=products.map((p,i)=>`
+ <div class="card product-card" data-name="${esc(p.name)}" data-cat="${esc(p.cat)}">
+ <button class="heart" onclick="wish(this)">♡</button>
+ <div class="photo">Product Photo</div>
+ <div class="info"><b>${esc(p.name)}</b><span class="price">${money(p.price)}</span>
+ <button class="btn" style="width:100%;margin-top:8px" onclick="showProduct(${i})">VIEW DETAILS</button>
+ <button class="btn primary" style="width:100%;margin-top:7px" onclick="add('${jsq(p.name)}',${p.price})">ADD TO CART</button></div></div>`).join('');
+}
+function esc(x){return String(x).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
+function jsq(x){return String(x).replace(/\\/g,'\\\\').replace(/'/g,"\\'")}
+
+let adminLogged=false;
+const ADMIN_PIN='2026'; // demo only; change before testing if desired
+function openAdmin(){document.getElementById('adminModal').classList.add('open');document.getElementById('loginPanel').style.display=adminLogged?'none':'block';document.getElementById('adminPanel').style.display=adminLogged?'block':'none'}
+function closeAdmin(){document.getElementById('adminModal').classList.remove('open')}
+function adminLogin(){
+ if(document.getElementById('adminPin').value===ADMIN_PIN){
+   adminLogged=true;document.getElementById('loginPanel').style.display='none';document.getElementById('adminPanel').style.display='block';
+ }else alert('Wrong PIN.');
+}
+function exportProducts(){
+ const blob=new Blob([JSON.stringify(products,null,2)],{type:'application/json'});
+ const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='arons-store-products.json';a.click();URL.revokeObjectURL(a.href);
+}
+function importProducts(e){
+ const file=e.target.files[0];if(!file)return;
+ const r=new FileReader();
+ r.onload=()=>{try{const data=JSON.parse(r.result);if(!Array.isArray(data))throw 0;products=data;saveProducts();alert('Products imported successfully.')}catch(err){alert('Invalid product JSON file.')}};
+ r.readAsText(file);
+}
+
+function openManager(){document.getElementById('managerModal').classList.add('open');renderManager()}
+function closeManager(){document.getElementById('managerModal').classList.remove('open');editingIndex=-1}
+function renderManager(){
+ const el=document.getElementById('managerList'); if(!el)return;
+ el.innerHTML=products.map((p,i)=>`<div class="row"><div><b>${esc(p.name)}</b><br><small>${esc(p.cat)} • ${money(p.price)}</small></div><div><button class="btn" onclick="editProduct(${i})">Edit</button> <button class="btn" style="background:#35151b" onclick="deleteProduct(${i})">Delete</button></div></div>`).join('');
+}
+function editProduct(i){
+ editingIndex=i; const p=products[i];
+ mName.value=p.name;mCat.value=p.cat;mPrice.value=p.price;mDesc.value=p.desc;
+ window.scrollTo(0,0);
+}
+function saveProduct(){
+ const name=mName.value.trim(),cat=mCat.value,price=Number(mPrice.value),desc=mDesc.value.trim();
+ if(!name||!price){alert('Product name and price are required.');return}
+ const item={name,cat,price,desc};
+ if(editingIndex>=0) products[editingIndex]=item; else products.push(item);
+ editingIndex=-1;mName.value='';mPrice.value='';mDesc.value='';
+ saveProducts();
+}
+function deleteProduct(i){if(confirm('Delete this product?')){products.splice(i,1);saveProducts()}}
+
+function filterProducts(){
+ const q=document.getElementById('search').value.toLowerCase().trim();
+ const cat=document.getElementById('filterCat').value;
+ document.querySelectorAll('.product-card').forEach(c=>{
+   const okName=c.dataset.name.toLowerCase().includes(q);
+   const okCat=cat==='all'||c.dataset.cat===cat;
+   c.style.display=(okName&&okCat)?'block':'none';
+ });
+}
+function showProduct(i){
+ const p=products[i];
+ document.getElementById('pmname').textContent=p.name;
+ document.getElementById('pmcat').textContent=p.cat.toUpperCase();
+ document.getElementById('pmprice').textContent=money(p.price);
+ document.getElementById('pmdesc').textContent=p.desc||'';
+ document.getElementById('pmcart').onclick=()=>{add(p.name,p.price);closeProduct()};
+ document.getElementById('productModal').classList.add('open');
+}
+function closeProduct(){document.getElementById('productModal').classList.remove('open')}
+function wish(b){
+ const on=b.textContent==='♡';
+ b.textContent=on?'♥':'♡';
+ b.style.color=on?'#ef4444':'#fff';
+}
+
+renderProducts();
+render();
+</script>
+</body></html>
